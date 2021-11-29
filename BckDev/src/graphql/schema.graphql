@@ -1,0 +1,21 @@
+type Query {
+    proyectos: [Proyecto!]
+}
+
+type Mutation {
+    createProyecto(nombre: String!, objetivog: String!, objetivose: String!, presupuesto: String!, fechainicio: String!, fechafinal: String!, nombrelider: String!, idlider: String!, estado: String!, fase: String!): Proyecto
+}
+
+type Proyecto {
+    _id: ID!
+    nombre: String!
+    objetivog: String!
+    objetivose: String!
+    presupuesto: String!
+    fechainicio: String!
+    fechafinal: String!
+    nombrelider: String!
+    idlider: String!
+    estado: String!
+    fase: String!
+}
