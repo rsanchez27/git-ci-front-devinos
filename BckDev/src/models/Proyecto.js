@@ -12,7 +12,7 @@ const proyectoSchema = new Schema({
         required: true
     }, 
     objetivose: {
-        type: String,
+        type: [String],
         required: true
     },
     presupuesto:{
@@ -36,11 +36,11 @@ const proyectoSchema = new Schema({
         required: true
     },
     estado:{
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     },
     fase:{
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     }
 });

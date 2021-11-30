@@ -10,12 +10,12 @@ type Proyecto {
     _id: ID!
     nombre: String!
     objetivog: String!
-    objetivose: String!
+    objetivose: [String]!
     presupuesto: String!
     fechainicio: String!
     fechafinal: String!
     nombrelider: String!
     idlider: String!
-    estado: String!
-    fase: String!
+    estado: ID!
+    fase: ID!
 }
