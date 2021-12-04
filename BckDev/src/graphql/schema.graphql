@@ -2,6 +2,9 @@ type Query {
     proyectos: [Proyecto!]
     buscarProyecto(_id: ID!): Proyecto!
     proyectoslider(nombrelider: String!): [Proyecto!]
+    infoProyecto(idproyecto: ID!): [Avance!]
+    avances: [Avance!]
+    buscarAvance(_id: ID!): Avance!
 }
 
 type Mutation {
@@ -31,6 +34,21 @@ type Mutation {
         estado: String!, 
         fase: String!
         ): Proyecto
+    
+    createAvance(
+        fecha: String!, 
+        descripcion: String!, 
+        observaciones: [String]!
+        proyecto: String! 
+        ): Avance
+
+    actualizarAvance(
+        _id:ID!,
+        fecha: String!, 
+        descripcion: String!, 
+        proyecto: [String]!
+
+        ): Avance
 }
 
 type Proyecto {
@@ -45,4 +63,12 @@ type Proyecto {
     idlider: String!
     estado: ID!
     fase: ID!
+}
+
+type Avance {
+    _id: ID!
+    fecha: String!, 
+    descripcion: String!, 
+    observaciones: [String]!
+    proyecto: String! 
 }
