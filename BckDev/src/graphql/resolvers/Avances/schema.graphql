@@ -1,0 +1,30 @@
+type Query {
+    avances: [Avance!]
+    buscarAvance(_id: ID!): Avance!
+   
+}
+
+type Mutation {
+    createAvance(
+        fecha: String!, 
+        descripcion: String!, 
+        observaciones: [String]!
+        proyecto: String! 
+        ): Avance
+
+    actualizarAvance(
+        _id:ID!,
+        fecha: String!, 
+        descripcion: String!, 
+        proyecto: [String]!
+
+        ): Avance
+}
+
+type Avance {
+    _id: ID!
+    fecha: String!, 
+    descripcion: String!, 
+    observaciones: [String]!
+    proyecto: String! 
+}
