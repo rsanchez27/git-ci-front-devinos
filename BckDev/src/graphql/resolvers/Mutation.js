@@ -5,6 +5,21 @@ const Mutation = {
         const newProyecto = new Proyecto({nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase})
         return await newProyecto.save()
     },
+    actualizarProyecto: async(_, {_id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase}) => {
+        const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
+            nombre,
+            objetivog,
+            objetivose,
+            presupuesto,
+            fechainicio,
+            fechafinal,
+            nombrelider,
+            idlider,
+            estado,
+            fase
+        });
+        return ProyectoEditado;
+    }
 }
 
 export default Mutation
