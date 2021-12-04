@@ -6,7 +6,6 @@ const avanceSchema = new Schema({
 
         proyecto: {
           type: Schema.Types.ObjectId,
-          ref: Proyecto,
           required: true,
         },
         
