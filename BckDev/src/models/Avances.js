@@ -4,11 +4,10 @@ const { Schema, model } = pkg;
 
 const avanceSchema = new Schema({
 
-        proyecto: {
+        idproyecto: {
           type: Schema.Types.ObjectId,
           required: true,
         },
-        
         fecha: {
           type: Date,
           required: true,

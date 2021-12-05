@@ -23,16 +23,16 @@ const Mutation = {
         });
         return ProyectoEditado;
     },
-    createAvance: async(_, {fecha,descripcion,observaciones, proyecto}) => {
-        const newAvance = new Avance({fecha,descripcion,observaciones, proyecto})
+    createAvance: async(_, {fecha,descripcion,observaciones, idproyecto}) => {
+        const newAvance = new Avance({fecha,descripcion,observaciones, idproyecto})
         return await newAvance.save()
     },
-    actualizarAvance: async(_, {fecha,descripcion,observaciones, proyecto}) => {
+    actualizarAvance: async(_, {fecha, descripcion, observaciones, idproyecto}) => {
         const avanceEditado = await Avance.findByIdAndUpdate(_id, {
             fecha,
             descripcion,
             observaciones,
-            proyecto,
+            idproyecto
         });
         return avanceEditado;
     },
