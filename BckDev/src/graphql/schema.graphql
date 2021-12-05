@@ -3,8 +3,21 @@ type Query {
     buscarProyecto(_id: ID!): Proyecto!
     proyectoslider(nombrelider: String!): [Proyecto!]
     infoProyecto(idproyecto: ID!): [Avance!]
+
     avances: [Avance!]
     buscarAvance(_id: ID!): Avance!
+
+    inscripcions: [Inscripcion!]
+    buscarInscripcion(_id: ID!): Inscripcion!
+    inscripcionsProy(idproyecto: String!): [Inscripcion!]
+
+    usuarios: [Usuario!]
+    buscarUsuarios(_id: ID!): Usuario!
+    verEstudiantes(rol: String!): Usuario!
+    validarUsuario(
+        correo: String!
+        contrasena: String!
+        ):Usuario
 }
 
 type Mutation {
@@ -49,6 +62,42 @@ type Mutation {
         proyecto: [String]!
 
         ): Avance
+
+    createInscripcion(
+        idproyecto: String!, 
+        idestudiante: String!, 
+        estado: String!, 
+        fechaingreso: String!, 
+        fechaegreso: String!
+        ):Inscripcion
+
+    actualizarInscripcion(
+        _id: ID!
+        idproyecto: String!
+        idestudiante: String!
+        estado: String!
+        fechaingreso: String!
+        fechaegreso: String!    
+        ):Inscripcion
+
+    registrarUsuario(
+        correo: String!
+        contrasena: String!  
+        identificacion: String!
+        nombre: String!
+        rol: String!
+        estado: String!
+        ):Usuario
+
+     actualizarUsuarios(
+        _id: ID!
+        correo: String!
+        contrasena: String!  
+        identificacion: String!
+        nombre: String!
+        rol: String!
+        estado: String!
+        ):Usuario
 }
 
 type Proyecto {
@@ -71,4 +120,23 @@ type Avance {
     descripcion: String!, 
     observaciones: [String]!
     proyecto: String! 
+}
+
+type Inscripcion {
+    _id: ID!
+    idproyecto: String!
+    idestudiante: String!
+    estado: String!
+    fechaingreso: String!
+    fechaegreso: String!
+}
+
+type Usuario {
+    _id: ID!
+    correo: String!
+    contrasena: String!  
+    identificacion: String!
+    nombre: String!
+    rol: String!
+    estado: String!
 }

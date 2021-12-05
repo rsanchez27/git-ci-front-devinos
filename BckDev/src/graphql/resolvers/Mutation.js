@@ -1,5 +1,7 @@
 import Proyecto from "../../models/Proyecto.js"
 import Avance from "../../models/Avances.js"
+import Inscripcion from "../../models/Inscripcion.js"
+import Usuario from "../../models/Usuario.js"
 
 const Mutation = {
     createProyecto: async(_, {nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase}) => {
@@ -33,6 +35,42 @@ const Mutation = {
             proyecto,
         });
         return avanceEditado;
+    },
+    createInscripcion: async(_, {idproyecto, idestudiante, estado, fechaingreso, fechaegreso}) => {
+        const newInscripcion = new Inscripcion({idproyecto, idestudiante, estado, fechaingreso, fechaegreso})
+        return await newInscripcion.save()
+    },
+    actualizarInscripcion: async(_, {_id, idproyecto, idestudiante, estado, fechaingreso, fechaegreso}) => {
+        const InscripcionEditado = await Inscripcion.findByIdAndUpdate(_id, {
+            idproyecto,
+            idestudiante,
+            estado,
+            fechaingreso,
+            fechaegreso
+        });
+        return InscripcionEditado;
+    },
+    registrarUsuario: async(_, {correo, contrasena, identificacion, nombre, rol, estado}) => {
+        const newUser = new Usuario({
+            correo, 
+            contrasena, 
+            identificacion, 
+            nombre, 
+            rol, 
+            estado
+        })
+        return await newUser.save()
+    },
+    actualizarUsuarios: async(_, {_id, correo, contrasena, identificacion, nombre, rol, estado}) => {
+        const UsuarioEditado = await Usuario.findByIdAndUpdate(_id, {
+            correo, 
+            contrasena, 
+            identificacion, 
+            nombre, 
+            rol, 
+            estado
+        });
+        return UsuarioEditado;
     }
 }
 
