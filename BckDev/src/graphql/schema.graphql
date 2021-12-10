@@ -59,6 +59,7 @@ type Mutation {
         _id:ID!,
         fecha: String!, 
         descripcion: String!, 
+        observaciones: [String]!
         idproyecto: ID!
 
         ): Avance

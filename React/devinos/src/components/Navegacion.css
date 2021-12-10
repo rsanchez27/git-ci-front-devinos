@@ -1,0 +1,29 @@
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    position: fixed;
+    top: 0vh;
+  
+    background-color: #8360c4cc;
+    color: rgb(0, 0, 0);
+  
+    height: 100vh;
+    width: 20%;
+}
+#navT {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+nav #navElements {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0px;
+
+}.Element{
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    transition: transform .2s linear;
+}
