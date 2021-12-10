@@ -1,10 +1,8 @@
 import React from "react";
 import './Navegacion.css';
-import Principal from "./Principal";
+
 import {
     Link,
-    Routes,
-    Route
 } from "react-router-dom";
 
 
@@ -20,10 +18,6 @@ function Navegacion() {
                     <Link to="/Usuarios" className="Element">  Usuarios </Link>
                 </div >
             </div>
-            <Routes>
-                <Route path="/Proyectos" element={<Principal component="1"/>} />
-                <Route path="/Usuarios" element={<Principal component="2"/>} />
-            </Routes>
         </nav>
     );
 }
