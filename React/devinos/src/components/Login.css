@@ -1,0 +1,23 @@
+#loginSec{
+    position: fixed;
+    top: 15vh;
+    left: 35%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#input{
+    padding: 10px;
+    margin: 10px;
+
+}
+
+#signIn{
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    border-color: white;
+}

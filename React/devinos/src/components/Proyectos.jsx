@@ -1,7 +1,10 @@
 import React from "react";
+import './mainStyle.css'
 function Proyectos() {
     return (
-        <div> Hola que mas </div>
+        <div id="main-section">
+            Proyects
+        </div>
     );
 }
 export default Proyectos;

@@ -1,0 +1,8 @@
+#main-section{
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 8vh;
+    right: 0;
+    width: 80%;
+    height: 100%;
+}

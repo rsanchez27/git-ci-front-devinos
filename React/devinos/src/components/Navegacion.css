@@ -3,14 +3,14 @@ nav {
     flex-direction: column;
     align-items: center;
   
-    position: fixed;
-    top: 0vh;
-  
-    background-color: #8360c4cc;
+    background-color: #894aff46;
     color: rgb(0, 0, 0);
   
-    height: 100vh;
+    position: fixed;
+    top: 0vh;
+    left: 0;
     width: 20%;
+    height: 100%;
 }
 #navT {
     margin-top: 20px;
