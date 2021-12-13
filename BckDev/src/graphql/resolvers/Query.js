@@ -2,6 +2,8 @@ import Proyecto from "../../models/Proyecto.js"
 import Avance from "../../models/Avances.js"
 import Inscripcion from "../../models/Inscripcion.js"
 import Usuario from "../../models/Usuario.js"
+import bcrypt from 'bcrypt'
+import { generateToken } from "../../Utils/tokenUtils.js"
 
 const Query = {
     proyectos: async() => {
@@ -39,18 +41,11 @@ const Query = {
     },
     buscarUsuarios: async(_,_id) => {
         return await Usuario.findOne(_id)
+        
     },
     verEstudiantes: async(_,rol) => {
         return await Usuario.findOne(rol)
     },
-    validarUsuario: async(_,correo, contrasena) => {
-        return await Usuario.findOne({
-            $and: [
-                correo,
-                contrasena
-            ]
-        })
-    }
 
 }
 

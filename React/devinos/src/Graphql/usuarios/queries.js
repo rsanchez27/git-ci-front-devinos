@@ -1,20 +1,5 @@
 import { gql } from '@apollo/client';
 
-const VALIDARUSUARIO = gql`
-query validarUsuario($correo: String!, $contrasena: String!) {
-  validarUsuario(correo: $correo, contrasena: $contrasena) {
-    _id
-    correo
-    contrasena
-    identificacion
-    nombre
-    rol
-    estado
-  }
-}
-
-`;
-
 const GET_USUARIOS = gql`
 query Usuarios {
   usuarios {
@@ -44,4 +29,4 @@ const GET_USUARIO = gql`
 
 `;
 
-export { VALIDARUSUARIO, GET_USUARIOS, GET_USUARIO };
+export { GET_USUARIOS, GET_USUARIO };

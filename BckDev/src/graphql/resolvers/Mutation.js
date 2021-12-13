@@ -2,13 +2,15 @@ import Proyecto from "../../models/Proyecto.js"
 import Avance from "../../models/Avances.js"
 import Inscripcion from "../../models/Inscripcion.js"
 import Usuario from "../../models/Usuario.js"
+import bcrypt from 'bcrypt'
+import { generateToken } from "../../Utils/tokenUtils.js"
 
 const Mutation = {
     createProyecto: async(_, {nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase}) => {
         const newProyecto = new Proyecto({nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase})
         return await newProyecto.save()
     },
-    actualizarProyecto: async(_, {_id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase}) => {
+    actualizarProyecto: async(_, {_id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, estado, fase}) => {
         const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
             nombre,
             objetivog,
@@ -17,7 +19,6 @@ const Mutation = {
             fechainicio,
             fechafinal,
             nombrelider,
-            idlider,
             estado,
             fase
         });
@@ -50,14 +51,16 @@ const Mutation = {
         });
         return InscripcionEditado;
     },
-    registrarUsuario: async(_, {correo, contrasena, identificacion, nombre, rol, estado}) => {
+    registrarUsuario: async(_, {correo, contrasena, identificacion, nombre, rol}) => {
+        const salt = await bcrypt.genSalt(5)
+        const hashedPassword = await bcrypt.hash(contrasena, salt)
         const newUser = new Usuario({
             correo, 
-            contrasena, 
+            contrasena: hashedPassword, 
             identificacion, 
             nombre, 
             rol, 
-            estado
+            estado : "PENDIENTE"
         })
         return await newUser.save()
     },
@@ -71,7 +74,42 @@ const Mutation = {
             estado
         });
         return UsuarioEditado;
+    },
+    validarUsuario: async(_, {correo, contrasena}) => {
+        const usuarioEncontrado = await Usuario.findOne({correo});
+        if (await bcrypt.compare(contrasena, usuarioEncontrado.contrasena)){
+            return {
+                token: generateToken({
+                    _id: usuarioEncontrado._id,
+                    nombre: usuarioEncontrado.nombre,
+                    identificacion: usuarioEncontrado.identificacion,
+                    correo: usuarioEncontrado.correo,
+                    rol: usuarioEncontrado.rol,
+                    estado: usuarioEncontrado.estado
+                })
+            }
+        }
+        
+    },
+    refreshToken: async (parent, args, context) => {
+        console.log('contexto', context);
+        if (!context.userData) {
+          return {
+            error: 'token no valido',
+          };
+        } else {
+          return {
+            token: generateToken({
+              _id: context.userData._id,
+              nombre: context.userData.nombre,
+              apellido: context.userData.apellido,
+              identificacion: context.userData.identificacion,
+              correo: context.userData.correo,
+              rol: context.userData.rol,
+            }),
+            };
+        };
     }
-}
+};
 
-export default Mutation
+export default Mutation;

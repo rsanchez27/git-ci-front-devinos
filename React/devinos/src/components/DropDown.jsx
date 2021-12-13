@@ -8,8 +8,7 @@ const DropDown = ({ label, name, defaultValue = '', required, options }) => {
     setSelectedValue(defaultValue);
   }, [defaultValue]);
   return (
-      <select
-        id = "Edinput"
+      <select id = "select-style"
         required={required}
         name={name}
         value={selectedValue}

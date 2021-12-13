@@ -36,11 +36,11 @@ const proyectoSchema = new Schema({
         required: true
     },
     estado:{
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     fase:{
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     }
 });

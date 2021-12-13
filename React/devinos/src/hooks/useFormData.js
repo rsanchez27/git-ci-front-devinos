@@ -8,12 +8,15 @@ const useFormData = (initial) => {
     const obj = {};
     fd.forEach((value, key) => {
       obj[key] = value;
+      console.log(obj[key])
     });
     return obj;
   };
   const updateFormData = () => {
     setFormData(getFormData());
   };
+
+  
   return { form, formData, updateFormData };
 };
 

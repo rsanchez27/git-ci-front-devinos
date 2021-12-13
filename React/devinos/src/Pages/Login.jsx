@@ -1,14 +1,44 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import LogoDevinos2 from "../assets/LogoDevinos2.png";
+import useFormData from '../hooks/useFormData';
+import { VALIDARUSUARIO } from '../Graphql/usuarios/mutations';
+import { useMutation} from '@apollo/client';
+import ButtonLoading from '../components/ButtonLoading';
 import "./Login.css"
 import {
-    Link,
+    Link, useNavigate,
 } from "react-router-dom";
+import { useAuth } from '../Contexts/authContext';
 
 export const Login = () => {
+    const navigate = useNavigate();
+    const auth = useAuth();
+    const { form, formData, updateFormData } = useFormData();
+
+    const [validarUsuario, {loading, error, data}] = useMutation(VALIDARUSUARIO);
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        validarUsuario({
+            variables : formData
+        });
+    };
+
+    useEffect(() => {
+        if (data){
+            if (data.validarUsuario.token) {
+                auth.setToken(data.validarUsuario.token)
+                navigate('/Index');
+            }
+        }
+    }, [data, navigate])
+
 
     return (
-        <section>
+        <form
+            onSubmit={submitForm}
+            onChange={updateFormData}
+            ref={form}>
             <div id="loginSec">
                 <div>
                     <img src={LogoDevinos2} />
@@ -17,28 +47,31 @@ export const Login = () => {
                     <input
                         type="text"
                         id="input"
-                        className="inputUserLogin"
-                        placeholder="Nombre de Usuario"
+                        name = "correo"
+                        placeholder="Correo"
+                        required={true}
                     />
                 </div>
                 <div>
                     <input
-                        type="text"
+                        type="password"
                         id="input"
-                        className="inputUserLogin"
-                        placeholder="Nombre de Usuario"
+                        name = "contrasena"
+                        placeholder="Contraseña"
+                        required={true}
                     />
                 </div>
 
-                <div>
-                    <a href="/Index"><input type="button" value="Iniciar sesión" name="acceder" id="Boton-Style"></input> </a>
-                </div>
+                <ButtonLoading
+                    loading={loading}
+                    text='Acceder'
+                />
                 <div id="regcomment">¿no tienes una cuenta?</div>
                 <div >
-                    <Link to="/Registro" id="regLink">  Registrarse </Link>
+                    <Link to="/auth/Registro" id="regLink">  Registrarse </Link>
                 </div >
             </div>
-        </section>
+        </form>
     )
 }
 
