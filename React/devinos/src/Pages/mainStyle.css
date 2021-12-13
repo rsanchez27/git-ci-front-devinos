@@ -1,0 +1,69 @@
+#main-section{
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 8vh;
+    right: 0;
+    width: 80%;
+    height: 100%;
+}
+
+#tabla{
+    margin-top: 15px;
+    margin-left: 35px;
+    width: 95%;
+}
+
+#tabla th{
+    background-color: #894aff46;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 10px;
+    font-size: 14px;
+}
+
+#tabla td{
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#section-title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formEditar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#formEditar div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#formEditar div div{
+    font-size: 30px;
+    padding: 20px;
+    margin-left: 30%;
+    width: 30%;
+}
+
+#Edinput{
+    background-color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    border: 0;
+    width: 40%;
+
+}

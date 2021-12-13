@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 export const Login = () => {
+
     return (
         <section>
             <div id="loginSec">
@@ -30,10 +31,11 @@ export const Login = () => {
                 </div>
 
                 <div>
-                    <a href="/Index"><input type="button" value="Log in" name="acceder" id="signIn"></input> </a>
+                    <a href="/Index"><input type="button" value="Iniciar sesión" name="acceder" id="Boton-Style"></input> </a>
                 </div>
-                <div id="navElements">
-                    <Link to="/Registro" className="Element">  Registro </Link>
+                <div id="regcomment">¿no tienes una cuenta?</div>
+                <div >
+                    <Link to="/Registro" id="regLink">  Registrarse </Link>
                 </div >
             </div>
         </section>

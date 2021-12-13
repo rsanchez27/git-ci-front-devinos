@@ -1,10 +1,10 @@
 import React from "react";
 import './mainStyle.css'
-function Usuarios() {
+function Estudiantes() {
     return (
         <div id="main-section">
-            Users
+            Student list
         </div>
     );
 }
-export default Usuarios;
+export default Estudiantes;

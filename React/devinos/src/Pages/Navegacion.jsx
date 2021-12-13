@@ -1,8 +1,6 @@
 import React from "react";
 import './Navegacion.css';
-import {
-    Link,
-} from "react-router-dom";
+import {Link,} from "react-router-dom";
 
 
 function Navegacion() {
@@ -15,6 +13,9 @@ function Navegacion() {
                 </div>
                 <div id="navElements">
                     <Link to="/Index/Usuarios" className="Element">  Usuarios </Link>
+                </div >
+                <div id="navElements">
+                    <Link to="/Index/Estudiantes" className="Element">  Estudiantes </Link>
                 </div >
             </div>
         </nav>
