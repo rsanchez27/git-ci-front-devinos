@@ -10,6 +10,9 @@ header{
 }
 header button{
     position: relative;
-    left: 90%;
-    background-color: blue;
+    left: 93%;
+    background-color: #894aff46;
+    width: 6%;
+    height: 4vh;
+    font-size: 15px;
 }

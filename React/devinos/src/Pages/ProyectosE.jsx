@@ -1,13 +1,13 @@
 import React from "react";
 import './mainStyle.css'
 import PrivateRoute from "../components/PrivateRoute";
-function Estudiantes() {
+function ProyectosE() {
     return (
-        <PrivateRoute roleList={"LIDER"}>
+        <PrivateRoute roleList={"ESTUDIANTE"}>
             <div id="main-section">
-                Student list
+                ProyectosE
             </div>
         </PrivateRoute>
     );
 }
-export default Estudiantes;
+export default ProyectosE;

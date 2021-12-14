@@ -15,8 +15,6 @@
 
 }
 
-
-
 #Boton-Style{
     padding: 10px;
     margin: 5px;
@@ -27,5 +25,5 @@
     margin-top: 100px;
 }
 #regLink{
-    color: blue;
+    color: #894aff;
 }

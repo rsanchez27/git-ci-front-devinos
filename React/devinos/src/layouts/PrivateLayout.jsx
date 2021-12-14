@@ -26,7 +26,7 @@ const PrivateLayout = () => {
         setToken(dataMutation.refreshToken.token);
       } else {
         setToken(null);
-        navigate('/login');
+        navigate('/');
       }
       setLoadingAuth(false);
     }

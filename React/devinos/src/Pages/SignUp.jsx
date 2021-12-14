@@ -24,7 +24,7 @@ function SignUp() {
 
     useEffect(() => {
         if (dataMutation) {
-            navigate('/login');
+            navigate('/');
         }
     });
 
@@ -90,8 +90,10 @@ function SignUp() {
                     text='Registrar usuario'
                 />
                 <span>¿Ya estás registrado?</span>
-                <Link to='/'>
-                    <span >Inicia sesión</span>
+                <Link 
+                id = "regLink"
+                to='/'>
+                    Inicia sesión
                 </Link>
 
             </form>
