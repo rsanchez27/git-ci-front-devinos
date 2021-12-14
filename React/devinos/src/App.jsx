@@ -10,7 +10,7 @@ import Estudiantes from './Pages/Estudiantes';
 //import Navegacion from './components/Navegacion';
 import PrivateLayout from './layouts/PrivateLayout';
 import { AuthContext } from './Contexts/authContext';
-//import { setContext } from '@apollo/client/link/context';
+import { setContext } from '@apollo/client/link/context';
 import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 //import jwt_decode from 'jwt-decode';
 import AuthLayout from './layouts/AuthLayout';
@@ -21,7 +21,7 @@ import {
   Route,
 } from "react-router-dom";
 
-/*
+
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = JSON.parse(localStorage.getItem('token'));
@@ -33,14 +33,16 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-*/
 
+
+
+/*
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
 });
 
-/*
+*/
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -51,7 +53,9 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
 });
 
-*/
+
+
+
 
 const App = () => {
   /*const [userData, setUserData] = useState({});*/
@@ -95,8 +99,8 @@ const App = () => {
               <Route path="/Index/usuarios/editar/:_id" element={<EditarUsuario />} />
               <Route path="/Index/Proyectos/editar/:_id" element={<EditarProyecto />} />
             </Route>
-            <Route path='/auth' element={<AuthLayout />}>
-              <Route path='login' element={<Login />} />
+            <Route path='/' element={<AuthLayout />}>
+              <Route path='' element={<Login />} />
               <Route path='Registro' element={<SignUp />} />
             </Route>
           </Routes>

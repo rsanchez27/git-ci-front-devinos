@@ -2,8 +2,6 @@ import Proyecto from "../../models/Proyecto.js"
 import Avance from "../../models/Avances.js"
 import Inscripcion from "../../models/Inscripcion.js"
 import Usuario from "../../models/Usuario.js"
-import bcrypt from 'bcrypt'
-import { generateToken } from "../../Utils/tokenUtils.js"
 
 const Query = {
     proyectos: async() => {

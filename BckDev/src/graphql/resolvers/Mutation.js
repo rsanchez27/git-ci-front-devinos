@@ -6,11 +6,11 @@ import bcrypt from 'bcrypt'
 import { generateToken } from "../../Utils/tokenUtils.js"
 
 const Mutation = {
-    createProyecto: async(_, {nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase}) => {
-        const newProyecto = new Proyecto({nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase})
+    createProyecto: async (_, { nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase }) => {
+        const newProyecto = new Proyecto({ nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase })
         return await newProyecto.save()
     },
-    actualizarProyecto: async(_, {_id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, estado, fase}) => {
+    actualizarProyecto: async (_, { _id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, estado, fase }) => {
         const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
             nombre,
             objetivog,
@@ -24,11 +24,11 @@ const Mutation = {
         });
         return ProyectoEditado;
     },
-    createAvance: async(_, {fecha,descripcion,observaciones, idproyecto}) => {
-        const newAvance = new Avance({fecha,descripcion,observaciones, idproyecto})
+    createAvance: async (_, { fecha, descripcion, observaciones, idproyecto }) => {
+        const newAvance = new Avance({ fecha, descripcion, observaciones, idproyecto })
         return await newAvance.save()
     },
-    actualizarAvance: async(_, {_id, fecha, descripcion, observaciones, idproyecto}) => {
+    actualizarAvance: async (_, { _id, fecha, descripcion, observaciones, idproyecto }) => {
         const avanceEditado = await Avance.findByIdAndUpdate(_id, {
             fecha,
             descripcion,
@@ -37,11 +37,11 @@ const Mutation = {
         });
         return avanceEditado;
     },
-    createInscripcion: async(_, {idproyecto, idestudiante, estado, fechaingreso, fechaegreso}) => {
-        const newInscripcion = new Inscripcion({idproyecto, idestudiante, estado, fechaingreso, fechaegreso})
+    createInscripcion: async (_, { idproyecto, idestudiante, estado, fechaingreso, fechaegreso }) => {
+        const newInscripcion = new Inscripcion({ idproyecto, idestudiante, estado, fechaingreso, fechaegreso })
         return await newInscripcion.save()
     },
-    actualizarInscripcion: async(_, {_id, idproyecto, idestudiante, estado, fechaingreso, fechaegreso}) => {
+    actualizarInscripcion: async (_, { _id, idproyecto, idestudiante, estado, fechaingreso, fechaegreso }) => {
         const InscripcionEditado = await Inscripcion.findByIdAndUpdate(_id, {
             idproyecto,
             idestudiante,
@@ -51,33 +51,33 @@ const Mutation = {
         });
         return InscripcionEditado;
     },
-    registrarUsuario: async(_, {correo, contrasena, identificacion, nombre, rol}) => {
+    registrarUsuario: async (_, { correo, contrasena, identificacion, nombre, rol }) => {
         const salt = await bcrypt.genSalt(5)
         const hashedPassword = await bcrypt.hash(contrasena, salt)
         const newUser = new Usuario({
-            correo, 
-            contrasena: hashedPassword, 
-            identificacion, 
-            nombre, 
-            rol, 
-            estado : "PENDIENTE"
+            correo,
+            contrasena: hashedPassword,
+            identificacion,
+            nombre,
+            rol,
+            estado: "PENDIENTE"
         })
         return await newUser.save()
     },
-    actualizarUsuarios: async(_, {_id, correo, contrasena, identificacion, nombre, rol, estado}) => {
+    actualizarUsuarios: async (_, { _id, correo, contrasena, identificacion, nombre, rol, estado }) => {
         const UsuarioEditado = await Usuario.findByIdAndUpdate(_id, {
-            correo, 
-            contrasena, 
-            identificacion, 
-            nombre, 
-            rol, 
+            correo,
+            contrasena,
+            identificacion,
+            nombre,
+            rol,
             estado
         });
         return UsuarioEditado;
     },
-    validarUsuario: async(_, {correo, contrasena}) => {
-        const usuarioEncontrado = await Usuario.findOne({correo});
-        if (await bcrypt.compare(contrasena, usuarioEncontrado.contrasena)){
+    validarUsuario: async (_, { correo, contrasena }) => {
+        const usuarioEncontrado = await Usuario.findOne({ correo });
+        if (await bcrypt.compare(contrasena, usuarioEncontrado.contrasena)) {
             return {
                 token: generateToken({
                     _id: usuarioEncontrado._id,
@@ -89,24 +89,23 @@ const Mutation = {
                 })
             }
         }
-        
+
     },
     refreshToken: async (parent, args, context) => {
-        console.log('contexto', context);
         if (!context.userData) {
-          return {
-            error: 'token no valido',
-          };
+            return {
+                error: 'token no valido',
+            };
         } else {
-          return {
-            token: generateToken({
-              _id: context.userData._id,
-              nombre: context.userData.nombre,
-              apellido: context.userData.apellido,
-              identificacion: context.userData.identificacion,
-              correo: context.userData.correo,
-              rol: context.userData.rol,
-            }),
+            return {
+                token: generateToken({
+                    _id: context.userData._id,
+                    nombre: context.userData.nombre,
+                    apellido: context.userData.apellido,
+                    identificacion: context.userData.identificacion,
+                    correo: context.userData.correo,
+                    rol: context.userData.rol,
+                }),
             };
         };
     }

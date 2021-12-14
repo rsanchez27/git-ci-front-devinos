@@ -68,7 +68,7 @@ export const Login = () => {
                 />
                 <div id="regcomment">¿no tienes una cuenta?</div>
                 <div >
-                    <Link to="/auth/Registro" id="regLink">  Registrarse </Link>
+                    <Link to="/Registro" id="regLink">  Registrarse </Link>
                 </div >
             </div>
         </form>

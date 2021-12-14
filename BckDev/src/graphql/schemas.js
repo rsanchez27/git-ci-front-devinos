@@ -1,3 +1,7 @@
+import { gql } from 'apollo-server-express';
+
+const tipos = gql`
+
 type Query {
     proyectos: [Proyecto!]
     buscarProyecto(_id: ID!): Proyecto!
@@ -96,8 +100,8 @@ type Mutation {
     validarUsuario(
         correo: String!
         contrasena: String!
-        ):Token!
-    refreshToken:Token!
+        ):Token
+    refreshToken:Token
 }
 
 type Proyecto {
@@ -145,3 +149,6 @@ type Token{
     token: String
     error: String
 }
+
+`;
+export { tipos };

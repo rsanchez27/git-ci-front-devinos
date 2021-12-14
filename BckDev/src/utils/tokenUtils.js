@@ -4,10 +4,11 @@ const generateToken = (payload) => {
     return jwt.sign(payload, "secret", {expiresIn: "24h"});
 };
 
-/*
+
 const validateToken = (token) => {
     if (token ) {
         const verificacion = jwt.verify(token, "secret", (err, data)=>{
+          
             if(data){
                 return {
                     data: data,
@@ -18,11 +19,11 @@ const validateToken = (token) => {
                     error: err,
                 };
             }
-        });
-        return verificacion
+    });
+    return verificacion
     }
 }
 
-*/
 
-export {generateToken}
+
+export {generateToken, validateToken}
