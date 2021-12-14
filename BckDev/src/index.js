@@ -23,15 +23,15 @@ export const server = new ApolloServer({
     typeDefs: tipos,
     resolvers,
     context: ({ req }) => {
-        console.log("Toc Frnot", req.headers.authorization)
-
-        const userData = getUserData(req.headers.authorization);
-        if (userData) {
+        const token = req.headers?.authorization ?? null;
+        if (token) {
+          const userData = getUserData(token);
+          if (userData) {
             return { userData };
+          }
         }
-
         return null;
-    },
+      },
 })
 
 const app = express();
