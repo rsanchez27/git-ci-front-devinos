@@ -4,15 +4,15 @@ import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { EDITAR_USUARIO } from '../Graphql/usuarios/mutations';
 import useFormData from '../hooks/useFormData';
-import { useParams } from 'react-router-dom';
-import DropDown from '../components/DropDown';
 import ButtonLoading from '../components/ButtonLoading';
+import { useUser } from '../Contexts/userContext';
 import './mainStyle.css'
 
 
-const EditarUsuario = () => {
+const Perfil = () => {
     const { form, formData, updateFormData } = useFormData(null);
-    const { _id } = useParams();
+    const { userData } = useUser();
+    const _id = userData._id
     const {
         loading,
         error,
@@ -40,8 +40,8 @@ const EditarUsuario = () => {
 
 
         <div id="main-section">
-
-            <div id="section-title">Editar Usuario</div>
+         
+            <div id="section-title">Mis datos</div>
             <form
                 id="formEditar"
                 onSubmit={submitForm}
@@ -52,56 +52,49 @@ const EditarUsuario = () => {
                     <div>Nombre:</div>
                     <input
                         type="text"
-                        id="Edinput"
+                        id="Pinput"
                         name="nombre"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.nombre}
+                        defaultValue={userData.nombre}
                     />
                 </div>
                 <div>
                     <div>Identificación:</div>
                     <input
                         type="text"
-                        id="Edinput"
+                        id="Pinput"
                         name="identificacion"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.identificacion}
+                        defaultValue={userData.identificacion}
                     />
                 </div>
                 <div>
                     <div>Correo:</div>
                     <input
                         type="text"
-                        id="Edinput"
+                        id="Pinput"
                         name="correo"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.correo}
+                        defaultValue={userData.correo}
+                    />
+                </div>
+                <div>
+                    <div>Contraseña:</div>
+                    <input
+                        type="password"
+                        id="Pinput"
+                        name="contrasena"
+                        defaultValue={null}
                     />
                 </div>
                 <div>
                     <div>Rol:</div>
                     <input
                         type="text"
-                        id="Edinput"
+                        id="Pinput"
                         name="rol"
                         disabled={true}
-                        defaultValue={data.buscarUsuarios.rol}
+                        defaultValue={userData.rol}
                     />
                 </div>
-                <div>
-                    <div>Estado:</div>
-                    <DropDown
-                        label='Estado Usuario:'
-                        name='estado'
-                        defaultValue={data.buscarUsuarios.estado}
-                        required={true}
-                        options={{
-                            PENDIENTE: 'Pendiente',
-                            AUTORIZADO: 'Autorizado',
-                            NO_AUTORIZADO: 'No autorizado',
-                        }}
-                    />
-                </div>
+
                 <ButtonLoading
                     disabled={Object.keys(formData).length === 0}
                     loading={loadingMutation}
@@ -113,4 +106,4 @@ const EditarUsuario = () => {
     );
 };
 
-export default EditarUsuario;
+export default Perfil;

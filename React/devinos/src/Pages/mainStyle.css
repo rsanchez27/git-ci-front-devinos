@@ -57,6 +57,11 @@
     width: 30%;
 }
 
+#formEditar div li{
+    font-size: 20px;
+    padding: 10px;
+}
+
 #Edinput{
     background-color: white;
     font-size: 20px;
@@ -67,6 +72,8 @@
     width: 40%;
 
 }
+
+
 
 #select-style{
     padding: 10px;

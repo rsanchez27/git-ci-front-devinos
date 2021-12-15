@@ -97,10 +97,12 @@ type Mutation {
         rol: String
         estado: String
         ):Usuario
+
     validarUsuario(
         correo: String!
         contrasena: String!
         ):Token
+
     refreshToken:Token
 }
 

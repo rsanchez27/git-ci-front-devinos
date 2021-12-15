@@ -23,7 +23,7 @@ const EditarProyecto = () => {
     const submitForm = (e) => {
         e.preventDefault();
         editarproyecto({
-            variables: { _id, ...formData},
+            variables: { _id, ...formData },
         });
     };
 
@@ -52,10 +52,11 @@ const EditarProyecto = () => {
                 <div>
                     <div>Nombre del proyecto:</div>
                     <input
-                        id="Pinput"
+                        id="Edinput"
                         type='text'
                         name='nombre'
                         defaultValue={queryData.buscarProyecto.nombre}
+                        disabled={true}
                         required={true}
                     />
                 </div>
@@ -63,68 +64,77 @@ const EditarProyecto = () => {
                 <div>
                     <div>Objetivo General:</div>
                     <input
-                    id="Pinput"
-                    type='text'
-                    name='objetivog'
-                    defaultValue={queryData.buscarProyecto.objetivog}
-                    required={true}
-                />
+                        id="Edinput"
+                        type='text'
+                        name='objetivog'
+                        defaultValue={queryData.buscarProyecto.objetivog}
+                        disabled={true}
+                        required={true}
+                    />
                 </div>
 
                 <div>
                     <div>Objetivos específicos:</div>
-                    <input
-                    id="Pinput"
-                    type='text'
-                    name='objetivose'
-                    defaultValue={queryData.buscarProyecto.objetivose}
-                    required={true}
-                />
+                        {queryData.buscarProyecto.objetivose != [] ? (
+                            <>
+                                {queryData.buscarProyecto.objetivose.map((u) => {
+                                    return (
+                                        <li>{u}</li>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <div>No se han definido objetivos</div>
+                        )}
+
                 </div>
 
                 <div>
                     <div>Presupuesto:</div>
                     <input
-                    id="Pinput"
-                    type='number'
-                    name='presupuesto'
-                    defaultValue={queryData.buscarProyecto.presupuesto}
-                    required={true}
-                />
+                        id="Edinput"
+                        type='number'
+                        name='presupuesto'
+                        defaultValue={queryData.buscarProyecto.presupuesto}
+                        disabled={true}
+                        required={true}
+                    />
                 </div>
-                
+
                 <div>
                     <div>Fecha inicio:</div>
                     <input
-                    id="Pinput"
-                    type='text'
-                    name='fechainicio'
-                    defaultValue={queryData.buscarProyecto.fechainicio}
-                    required={true}
-                />
+                        id="Edinput"
+                        type='text'
+                        name='fechainicio'
+                        defaultValue={queryData.buscarProyecto.fechainicio}
+                        disabled={true}
+                        required={true}
+                    />
                 </div>
 
                 <div>
                     <div>Fecha final:</div>
                     <input
-                    id="Pinput"
-                    label='Fecha final'
-                    type='text'
-                    name='fechafinal'
-                    defaultValue={queryData.buscarProyecto.fechafinal}
-                    required={true}
-                />
+                        id="Edinput"
+                        type='text'
+                        name='fechafinal'
+                        defaultValue={queryData.buscarProyecto.fechafinal}
+                        disabled={true}
+                        required={true}
+                    />
                 </div>
-                
+
                 <div>
                     <div>Nombre líderl:</div>
                     <input
-                    id="Pinput"
-                    type='text'
-                    name='nombrelider'
-                    defaultValue={queryData.buscarProyecto.nombrelider}
-                    required={true}
-                />
+                        id="Edinput"
+                        type='text'
+                        name='nombrelider'
+                        defaultValue={queryData.buscarProyecto.nombrelider}
+                        disabled={true}
+                        required={true}
+                    />
                 </div>
 
                 <div>
@@ -149,13 +159,13 @@ const EditarProyecto = () => {
                         required={true}
                         options={{
                             INICIADO: 'Iniciado',
-                            DESARROLLO: 'En desarrollo',
+                            EN_DESARROLLO: 'En desarrollo',
                             TERMINADO: 'Terminado'
                         }}
                     />
                 </div>
-                
-                
+
+
                 <ButtonLoading
                     disabled={Object.keys(formData).length === 0}
                     loading={mutationLoading}

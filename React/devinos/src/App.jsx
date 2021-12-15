@@ -9,6 +9,7 @@ import SignUp from './Pages/SignUp';
 import EditarUsuario from './Pages/EditarUsuario';
 import EditarProyecto from './Pages/EditarProyectos';
 import Estudiantes from './Pages/Estudiantes';
+import Perfil from './Pages/Perfil';
 import PrivateLayout from './layouts/PrivateLayout';
 import { AuthContext } from './Contexts/authContext';
 import { setContext } from '@apollo/client/link/context';
@@ -86,6 +87,7 @@ const App = () => {
             <Routes>
               <Route path='/Index' element={<PrivateLayout />}>
                 <Route path='/Index' element={<Index />} />
+                <Route path='/Index/Perfil' element={<Perfil />} />
                 <Route path="/Index/Admin/Proyectos" element={<ProyectosA />} />
                 <Route path="/Index/Lider/Proyectos" element={<ProyectosL />} />
                 <Route path="/Index/Estudiante/Proyectos" element={<ProyectosE />} />

@@ -11,6 +11,18 @@ const Mutation = {
         return await newProyecto.save()
     },
     actualizarProyecto: async (_, { _id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, estado, fase }) => {
+        const actualProyect = await Proyecto.findOne({_id: _id})
+        if ((fase == "TERMINADO") && (actualProyect.fase != "TERMINADO")){
+            estado = "INACTIVO"
+            const tiempoTranscurrido = Date.now();
+            const hoy = new Date(tiempoTranscurrido);
+            fechafinal = hoy.toLocaleDateString();
+
+        }
+        if ((actualProyect.fase == "TERMINADO")){
+            return actualProyect;
+
+        }
         const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
             nombre,
             objetivog,
@@ -65,15 +77,31 @@ const Mutation = {
         return await newUser.save()
     },
     actualizarUsuarios: async (_, { _id, correo, contrasena, identificacion, nombre, rol, estado }) => {
-        const UsuarioEditado = await Usuario.findByIdAndUpdate(_id, {
-            correo,
-            contrasena,
-            identificacion,
-            nombre,
-            rol,
-            estado
-        });
-        return UsuarioEditado;
+        if ((contrasena == "")||(contrasena == null)){
+            const UsuarioEditado = await Usuario.findByIdAndUpdate(_id, {
+                correo,
+                identificacion,
+                nombre,
+                rol,
+                estado
+            });
+            return UsuarioEditado;
+            
+        }else{
+            const salt = await bcrypt.genSalt(5)
+            const hashedPassword = await bcrypt.hash(contrasena, salt)
+            const UsuarioEditado = await Usuario.findByIdAndUpdate(_id, {
+                correo,
+                contrasena: hashedPassword,
+                identificacion,
+                nombre,
+                rol,
+                estado
+            });
+            return UsuarioEditado;
+        }
+        
+        
     },
     validarUsuario: async (_, { correo, contrasena }) => {
         const usuarioEncontrado = await Usuario.findOne({ correo });

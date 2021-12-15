@@ -17,11 +17,20 @@ function Header() {
 
     return (
         <header>
-            <button onClick={() => deleteToken()}>
-                <NavLink to='/'>
+            <div>
+                <button >
+                    <NavLink to='/Index/Perfil'>
+                        Mi Perfil
+                    </NavLink>
+                </button>
+                <button onClick={() => deleteToken()}>
+                    <NavLink to='/'>
                         Cerrar Sesión
-                </NavLink>
-            </button>
+                    </NavLink>
+                </button>
+
+            </div>
+
 
         </header>
     );
