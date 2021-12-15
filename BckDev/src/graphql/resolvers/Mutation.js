@@ -6,7 +6,13 @@ import bcrypt from 'bcrypt'
 import { generateToken } from "../../Utils/tokenUtils.js"
 
 const Mutation = {
-    createProyecto: async (_, { nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase }) => {
+    createProyecto: async (_, { nombre, objetivog, objetivose, presupuesto, nombrelider, idlider }) => {
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
+        const fechainicio = hoy.toLocaleDateString();
+        const fechafinal = ""
+        const estado = "INACTIVO"
+        const fase = ""
         const newProyecto = new Proyecto({ nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, idlider, estado, fase })
         return await newProyecto.save()
     },
@@ -23,6 +29,24 @@ const Mutation = {
             return actualProyect;
 
         }
+        if ((estado == "ACTIVO") && (actualProyect.fase == "")){
+            fase = "INICIADO"
+        }
+        const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
+            nombre,
+            objetivog,
+            objetivose,
+            presupuesto,
+            fechainicio,
+            fechafinal,
+            nombrelider,
+            estado,
+            fase
+        });
+        return ProyectoEditado;
+    },
+    actualizarProyectoL: async (_, { _id, nombre, objetivog, objetivose, presupuesto, fechainicio, fechafinal, nombrelider, estado, fase }) => {
+
         const ProyectoEditado = await Proyecto.findByIdAndUpdate(_id, {
             nombre,
             objetivog,

@@ -7,6 +7,7 @@ import useFormData from '../hooks/useFormData';
 import { useParams } from 'react-router-dom';
 import DropDown from '../components/DropDown';
 import ButtonLoading from '../components/ButtonLoading';
+import PrivateRoute from '../components/PrivateRoute';
 import './mainStyle.css'
 
 
@@ -26,8 +27,7 @@ const EditarUsuario = () => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-        console.log(_id );
-      await actualizarUsuarios({
+        await actualizarUsuarios({
             variables: { _id, ...formData },
         });
     };
@@ -38,78 +38,79 @@ const EditarUsuario = () => {
 
     return (
 
+        <PrivateRoute roleList={"ADMINISTRADOR"}>
+            <div id="main-section">
 
-        <div id="main-section">
+                <div id="section-title">Editar Usuario</div>
+                <form
+                    id="formEditar"
+                    onSubmit={submitForm}
+                    onChange={updateFormData}
+                    ref={form}
+                >
+                    <div>
+                        <div>Nombre:</div>
+                        <input
+                            type="text"
+                            id="Edinput"
+                            name="nombre"
+                            disabled={true}
+                            defaultValue={data.buscarUsuarios.nombre}
+                        />
+                    </div>
+                    <div>
+                        <div>Identificación:</div>
+                        <input
+                            type="text"
+                            id="Edinput"
+                            name="identificacion"
+                            disabled={true}
+                            defaultValue={data.buscarUsuarios.identificacion}
+                        />
+                    </div>
+                    <div>
+                        <div>Correo:</div>
+                        <input
+                            type="text"
+                            id="Edinput"
+                            name="correo"
+                            disabled={true}
+                            defaultValue={data.buscarUsuarios.correo}
+                        />
+                    </div>
+                    <div>
+                        <div>Rol:</div>
+                        <input
+                            type="text"
+                            id="Edinput"
+                            name="rol"
+                            disabled={true}
+                            defaultValue={data.buscarUsuarios.rol}
+                        />
+                    </div>
+                    <div>
+                        <div>Estado:</div>
+                        <DropDown
+                            label='Estado Usuario:'
+                            name='estado'
+                            defaultValue={data.buscarUsuarios.estado}
+                            required={true}
+                            options={{
+                                PENDIENTE: 'Pendiente',
+                                AUTORIZADO: 'Autorizado',
+                                NO_AUTORIZADO: 'No autorizado',
+                            }}
+                        />
+                    </div>
+                    <ButtonLoading
+                        disabled={Object.keys(formData).length === 0}
+                        loading={loadingMutation}
+                        text='Confirmar'
+                    />
 
-            <div id="section-title">Editar Usuario</div>
-            <form
-                id="formEditar"
-                onSubmit={submitForm}
-                onChange={updateFormData}
-                ref={form}
-            >
-                <div>
-                    <div>Nombre:</div>
-                    <input
-                        type="text"
-                        id="Edinput"
-                        name="nombre"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.nombre}
-                    />
-                </div>
-                <div>
-                    <div>Identificación:</div>
-                    <input
-                        type="text"
-                        id="Edinput"
-                        name="identificacion"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.identificacion}
-                    />
-                </div>
-                <div>
-                    <div>Correo:</div>
-                    <input
-                        type="text"
-                        id="Edinput"
-                        name="correo"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.correo}
-                    />
-                </div>
-                <div>
-                    <div>Rol:</div>
-                    <input
-                        type="text"
-                        id="Edinput"
-                        name="rol"
-                        disabled={true}
-                        defaultValue={data.buscarUsuarios.rol}
-                    />
-                </div>
-                <div>
-                    <div>Estado:</div>
-                    <DropDown
-                        label='Estado Usuario:'
-                        name='estado'
-                        defaultValue={data.buscarUsuarios.estado}
-                        required={true}
-                        options={{
-                            PENDIENTE: 'Pendiente',
-                            AUTORIZADO: 'Autorizado',
-                            NO_AUTORIZADO: 'No autorizado',
-                        }}
-                    />
-                </div>
-                <ButtonLoading
-                    disabled={Object.keys(formData).length === 0}
-                    loading={loadingMutation}
-                    text='Confirmar'
-                />
-
-            </form>
-        </div>
+                </form>
+            </div>
+        </PrivateRoute>
     );
 };
 

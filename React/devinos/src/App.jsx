@@ -8,6 +8,7 @@ import Index from './Pages/Index';
 import SignUp from './Pages/SignUp';
 import EditarUsuario from './Pages/EditarUsuario';
 import EditarProyecto from './Pages/EditarProyectos';
+import EditarProyectoL from './Pages/EditarProyectoL'
 import Estudiantes from './Pages/Estudiantes';
 import Perfil from './Pages/Perfil';
 import PrivateLayout from './layouts/PrivateLayout';
@@ -17,6 +18,7 @@ import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@ap
 import jwt_decode from 'jwt-decode';
 import AuthLayout from './layouts/AuthLayout';
 import { UserContext } from './Contexts/userContext';
+import NewProyect from './Pages/NewProyect';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -90,11 +92,13 @@ const App = () => {
                 <Route path='/Index/Perfil' element={<Perfil />} />
                 <Route path="/Index/Admin/Proyectos" element={<ProyectosA />} />
                 <Route path="/Index/Lider/Proyectos" element={<ProyectosL />} />
+                <Route path="/Index/Lider/Proyectos/Nuevo" element={<NewProyect />} />
                 <Route path="/Index/Estudiante/Proyectos" element={<ProyectosE />} />
                 <Route path="/Index/Usuarios" element={<Usuarios />} />
                 <Route path="/Index/Estudiantes" element={<Estudiantes />} />
                 <Route path="/Index/usuarios/editar/:_id" element={<EditarUsuario />} />
                 <Route path="/Index/Proyectos/editar/:_id" element={<EditarProyecto />} />
+                <Route path="/Index/Lider/Proyectos/Editar/:_id" element={<EditarProyectoL />} />
               </Route>
               <Route path='/' element={<AuthLayout />}>
                 <Route path='' element={<Login />} />

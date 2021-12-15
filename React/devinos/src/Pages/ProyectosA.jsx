@@ -47,7 +47,7 @@ function ProyectosA() {
                 })}
               </>
             ) : (
-              <div>No autorizado</div>
+              <div>No hay proyectos</div>
             )}
           </tbody>
         </table>

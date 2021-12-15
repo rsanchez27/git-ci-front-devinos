@@ -34,4 +34,23 @@ query Proyectos($_id: ID!) {
 }
 `;
 
-export {GET_PROYECTOS, GET_PROYECTO};
+const PROYECTOS_LIDER = gql`
+query ($idlider: ID!) {
+  proyectoslider(idlider: $idlider) {
+    _id
+    nombre
+    objetivog
+    objetivose
+    presupuesto
+    fechainicio
+    fechafinal
+    nombrelider
+    idlider
+    estado
+    fase
+  }
+}
+`;
+
+
+export {GET_PROYECTOS, GET_PROYECTO, PROYECTOS_LIDER};

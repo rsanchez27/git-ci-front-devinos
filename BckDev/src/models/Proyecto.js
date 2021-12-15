@@ -12,7 +12,7 @@ const proyectoSchema = new Schema({
         required: true
     }, 
     objetivose: {
-        type: [String],
+        type: String,
         required: true
     },
     presupuesto:{
@@ -25,7 +25,6 @@ const proyectoSchema = new Schema({
     },
     fechafinal:{
         type: String,
-        required: true
     },
     nombrelider:{
         type: String,
@@ -41,7 +40,6 @@ const proyectoSchema = new Schema({
     },
     fase:{
         type: String,
-        required: true
     }
 });
 export default model("Proyecto", proyectoSchema )

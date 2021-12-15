@@ -13,8 +13,8 @@ const Query = {
     infoProyecto: async(_,idproyecto) => {
         return await Avance.find(idproyecto)
     },
-    proyectoslider: async(_, nombrelider) => {
-        return await Proyecto.find(nombrelider)
+    proyectoslider: async(_, idlider) => {
+        return await Proyecto.find(idlider)
     },
 
     avances: async() => {
