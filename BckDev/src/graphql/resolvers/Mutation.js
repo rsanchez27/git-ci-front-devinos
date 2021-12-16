@@ -160,16 +160,20 @@ const Mutation = {
     validarUsuario: async (_, { correo, contrasena }) => {
         const usuarioEncontrado = await Usuario.findOne({ correo });
         if (await bcrypt.compare(contrasena, usuarioEncontrado.contrasena)) {
-            return {
-                token: generateToken({
-                    _id: usuarioEncontrado._id,
-                    nombre: usuarioEncontrado.nombre,
-                    identificacion: usuarioEncontrado.identificacion,
-                    correo: usuarioEncontrado.correo,
-                    rol: usuarioEncontrado.rol,
-                    estado: usuarioEncontrado.estado
-                })
+            if (usuarioEncontrado.estado == "AUTORIZADO" ){
+                return {
+                    token: generateToken({
+                        _id: usuarioEncontrado._id,
+                        nombre: usuarioEncontrado.nombre,
+                        identificacion: usuarioEncontrado.identificacion,
+                        correo: usuarioEncontrado.correo,
+                        rol: usuarioEncontrado.rol,
+                        estado: usuarioEncontrado.estado
+                    })
+                }
+            }else{
             }
+
         }
 
     },
