@@ -1,7 +1,11 @@
+import { gql } from 'apollo-server-express';
+
+const tipos = gql`
+
 type Query {
     proyectos: [Proyecto!]
     buscarProyecto(_id: ID!): Proyecto!
-    proyectoslider(nombrelider: String!): [Proyecto!]
+    proyectoslider(idlider: ID!): [Proyecto!]
     infoProyecto(idproyecto: ID!): [Avance!]
 
     avances: [Avance!]
@@ -9,75 +13,77 @@ type Query {
 
     inscripcions: [Inscripcion!]
     buscarInscripcion(_id: ID!): Inscripcion!
-    inscripcionsProy(idproyecto: String!): [Inscripcion!]
+    inscripcionsProy(idproyecto: ID!): [Inscripcion!]
 
     usuarios: [Usuario!]
-    buscarUsuarios(_id: ID!): Usuario!
+    buscarUsuarios(_id: String!): Usuario!
     verEstudiantes(rol: String!): Usuario!
-    validarUsuario(
-        correo: String!
-        contrasena: String!
-        ):Usuario
 }
 
 type Mutation {
     createProyecto(
         nombre: String!, 
         objetivog: String!, 
-        objetivose: [String]!
+        objetivose: String!
         presupuesto: String!, 
-        fechainicio: String!, 
-        fechafinal: String!, 
         nombrelider: String!, 
-        idlider: String!, 
-        estado: ID!, 
-        fase: ID!
+        idlider: ID!, 
         ): Proyecto
 
     actualizarProyecto(
         _id:ID!,
-        nombre: String!, 
-        objetivog: String!, 
-        objetivose: [String]! 
-        presupuesto: String!, 
-        fechainicio: String!, 
-        fechafinal: String!, 
-        nombrelider: String!, 
-        idlider: String!, 
-        estado: String!, 
-        fase: String!
+        nombre: String, 
+        objetivog: String, 
+        objetivose: String, 
+        presupuesto: String, 
+        fechainicio: String, 
+        fechafinal: String, 
+        nombrelider: String, 
+        estado: String, 
+        fase: String
+        ): Proyecto
+
+    actualizarProyectoL(
+        _id:ID!,
+        nombre: String, 
+        objetivog: String, 
+        objetivose: String,
+        presupuesto: String, 
+        fechainicio: String, 
+        fechafinal: String, 
+        nombrelider: String, 
+        estado: String, 
+        fase: String
         ): Proyecto
     
     createAvance(
         fecha: String!, 
         descripcion: String!, 
-        observaciones: [String]!
+        observaciones: String!
         idproyecto: ID!
         ): Avance
 
     actualizarAvance(
         _id:ID!,
-        fecha: String!, 
-        descripcion: String!, 
+        fecha: String! 
+        descripcion: String! 
+        observaciones: String!
         idproyecto: ID!
 
         ): Avance
 
     createInscripcion(
-        idproyecto: String!, 
-        idestudiante: String!, 
-        estado: String!, 
-        fechaingreso: String!, 
-        fechaegreso: String!
+        idproyecto: ID! 
+        idestudiante: ID! 
         ):Inscripcion
 
     actualizarInscripcion(
         _id: ID!
-        idproyecto: String!
-        idestudiante: String!
-        estado: String!
-        fechaingreso: String!
-        fechaegreso: String!    
+        idproyecto: String
+        idestudiante: String
+        estado: String
+        fechaingreso: String
+        fechaegreso: String    
         ):Inscripcion
 
     registrarUsuario(
@@ -86,39 +92,45 @@ type Mutation {
         identificacion: String!
         nombre: String!
         rol: String!
-        estado: String!
         ):Usuario
 
      actualizarUsuarios(
-        _id: ID!
-        correo: String!
-        contrasena: String!  
-        identificacion: String!
-        nombre: String!
-        rol: String!
-        estado: String!
+        _id: String!
+        correo: String
+        contrasena: String  
+        identificacion: String
+        nombre: String
+        rol: String
+        estado: String
         ):Usuario
+
+    validarUsuario(
+        correo: String!
+        contrasena: String!
+        ):Token
+
+    refreshToken:Token
 }
 
 type Proyecto {
     _id: ID!
     nombre: String!
     objetivog: String!
-    objetivose: [String]!
+    objetivose: String!
     presupuesto: String!
     fechainicio: String!
     fechafinal: String!
     nombrelider: String!
     idlider: String!
-    estado: ID!
-    fase: ID!
+    estado: String!
+    fase: String!
 }
 
 type Avance {
     _id: ID!
-    fecha: String!, 
-    descripcion: String!, 
-    observaciones: [String]!
+    fecha: String! 
+    descripcion: String!
+    observaciones: String!
     idproyecto: ID!
 }
 
@@ -140,3 +152,11 @@ type Usuario {
     rol: String!
     estado: String!
 }
+
+type Token{
+    token: String
+    error: String
+}
+
+`;
+export { tipos };

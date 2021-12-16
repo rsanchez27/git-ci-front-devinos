@@ -16,12 +16,9 @@ const inscripcionSchema = new Schema({
         required: true
     },
     fechaingreso:{
-        type: String,
-        required: true
     },
     fechaegreso:{
         type: String,
-        required: true
     }
 });
 export default model("Inscripcion", inscripcionSchema )

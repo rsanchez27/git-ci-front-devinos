@@ -1,0 +1,50 @@
+#sup-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #91f0e03d;
+    height: 100vh;
+}
+
+#sup-section div{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sup-section form{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#sup-section form div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#sup-section form div div{
+    font-size: 30px;
+    padding: 10px;
+    margin-left: 20%;
+    width: 30%;
+}
+
+#Rinput{
+    background-color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    width: 40%;
+
+}
+#regLink{
+    color: #894aff;
+}
