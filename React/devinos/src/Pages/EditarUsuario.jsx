@@ -38,7 +38,7 @@ const EditarUsuario = () => {
 
     return (
 
-        <PrivateRoute roleList={"ADMINISTRADOR"}>
+        <PrivateRoute roleList={["ADMINISTRADOR", "LIDER"]}>
             <div id="main-section">
 
                 <div id="section-title">Editar Usuario</div>

@@ -13,7 +13,7 @@ type Query {
 
     inscripcions: [Inscripcion!]
     buscarInscripcion(_id: ID!): Inscripcion!
-    inscripcionsProy(idproyecto: String!): [Inscripcion!]
+    inscripcionsProy(idproyecto: ID!): [Inscripcion!]
 
     usuarios: [Usuario!]
     buscarUsuarios(_id: String!): Usuario!
@@ -73,20 +73,17 @@ type Mutation {
         ): Avance
 
     createInscripcion(
-        idproyecto: String! 
-        idestudiante: String! 
-        estado: String! 
-        fechaingreso: String! 
-        fechaegreso: String!
+        idproyecto: ID! 
+        idestudiante: ID! 
         ):Inscripcion
 
     actualizarInscripcion(
         _id: ID!
-        idproyecto: String!
-        idestudiante: String!
-        estado: String!
-        fechaingreso: String!
-        fechaegreso: String!    
+        idproyecto: String
+        idestudiante: String
+        estado: String
+        fechaingreso: String
+        fechaegreso: String    
         ):Inscripcion
 
     registrarUsuario(

@@ -7,12 +7,15 @@ const Query = {
     proyectos: async() => {
         return await Proyecto.find()
     },
+
     buscarProyecto: async(_,_id) => {
         return await Proyecto.findOne(_id)
     },
+    
     infoProyecto: async(_,idproyecto) => {
         return await Avance.find(idproyecto)
     },
+
     proyectoslider: async(_, idlider) => {
         return await Proyecto.find(idlider)
     },
@@ -20,6 +23,7 @@ const Query = {
     avances: async() => {
         return await Avance.find()
     },
+
     buscarAvance: async(_,_id) => {
         return await Avance.findOne(_id)
     },
@@ -27,9 +31,11 @@ const Query = {
     inscripcions: async () => {
         return await Inscripcion.find()
     },
+
     buscarInscripcion: async(_,_id) => {
         return await Inscripcion.findOne(_id)
     },
+
     inscripcionsProy: async(_, idproyecto) => {
         return await Inscripcion.find(idproyecto)
     },

@@ -7,6 +7,7 @@ import useFormData from '../hooks/useFormData';
 import { EDITAR_PROYECTO } from '../Graphql/proyectos/mutations';
 import DropDown from '../components/DropDown';
 import PrivateRoute from '../components/PrivateRoute';
+import PrivateComponent from '../components/PrivateComponent';
 import './mainStyle.css'
 
 const EditarProyecto = () => {
@@ -40,7 +41,7 @@ const EditarProyecto = () => {
     if (queryLoading) return <div>Cargando...</div>;
 
     return (
-        <PrivateRoute roleList={"ADMINISTRADOR"}>
+        <PrivateRoute roleList={["ADMINISTRADOR", "ESTUDIANTE"]}>
             <div id="main-section">
 
                 <div id="section-title">Informacion del Proyecto</div>
@@ -54,7 +55,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Nombre del proyecto:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='nombre'
                             defaultValue={queryData.buscarProyecto.nombre}
@@ -66,7 +67,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Objetivo General:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='objetivog'
                             defaultValue={queryData.buscarProyecto.objetivog}
@@ -78,7 +79,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Objetivos específicos:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='objetivose'
                             defaultValue={queryData.buscarProyecto.objetivose}
@@ -91,7 +92,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Presupuesto:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='number'
                             name='presupuesto'
                             defaultValue={queryData.buscarProyecto.presupuesto}
@@ -103,7 +104,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Fecha inicio:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='fechainicio'
                             defaultValue={queryData.buscarProyecto.fechainicio}
@@ -115,7 +116,7 @@ const EditarProyecto = () => {
                     <div>
                         <div>Fecha final:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='fechafinal'
                             defaultValue={queryData.buscarProyecto.fechafinal}
@@ -124,10 +125,11 @@ const EditarProyecto = () => {
                         />
                     </div>
 
+
                     <div>
                         <div>Nombre líderl:</div>
                         <input
-                            id="Edinput"
+                            id="Vinput"
                             type='text'
                             name='nombrelider'
                             defaultValue={queryData.buscarProyecto.nombrelider}
@@ -136,40 +138,61 @@ const EditarProyecto = () => {
                         />
                     </div>
 
-                    <div>
-                        <div>Estado proyecto:</div>
-                        <DropDown
-                            name='estado'
-                            defaultValue={queryData.buscarProyecto.estado}
-                            required={false}
-                            options={{
-                                ACTIVO: 'Activo',
-                                INACTIVO: 'Inactivo',
-                            }}
+                    <PrivateComponent roleList={"ADMINISTRADOR"}>
+                        <div>
+                            <div>Estado proyecto:</div>
+                            <DropDown
+                                name='estado'
+                                defaultValue={queryData.buscarProyecto.estado}
+                                required={false}
+                                options={{
+                                    ACTIVO: 'Activo',
+                                    INACTIVO: 'Inactivo',
+                                }}
+                            />
+                        </div>
+
+
+                        <div>
+                            <div>Fase proyecto:</div>
+                            <DropDown
+                                name='fase'
+                                defaultValue={queryData.buscarProyecto.fase}
+                                required={false}
+                                options={{
+                                    INICIADO: 'Iniciado',
+                                    EN_DESARROLLO: 'En desarrollo',
+                                    TERMINADO: 'Terminado'
+                                }}
+                            />
+                        </div>
+
+
+                        <ButtonLoading
+                            disabled={Object.keys(formData).length === 0}
+                            loading={mutationLoading}
+                            text='Confirmar'
                         />
-                    </div>
+
+                    </PrivateComponent>
+
+                    <PrivateComponent roleList={"ESTUDIANTE"}>
+
+                        <div>
+                            <div>Estado proyecto:</div>
+                            <input
+                                id="Vinput"
+                                type='text'
+                                name='estado'
+                                defaultValue={queryData.buscarProyecto.estado}
+                                disabled={true}
+                                required={true}
+                            />
+                        </div>
+
+                    </PrivateComponent>
 
 
-                    <div>
-                        <div>Fase proyecto:</div>
-                        <DropDown
-                            name='fase'
-                            defaultValue={queryData.buscarProyecto.fase}
-                            required={false}
-                            options={{
-                                INICIADO: 'Iniciado',
-                                EN_DESARROLLO: 'En desarrollo',
-                                TERMINADO: 'Terminado'
-                            }}
-                        />
-                    </div>
-
-
-                    <ButtonLoading
-                        disabled={Object.keys(formData).length === 0}
-                        loading={mutationLoading}
-                        text='Confirmar'
-                    />
                 </form>
 
             </div>

@@ -19,6 +19,9 @@ import jwt_decode from 'jwt-decode';
 import AuthLayout from './layouts/AuthLayout';
 import { UserContext } from './Contexts/userContext';
 import NewProyect from './Pages/NewProyect';
+import NewInscripcion from './Pages/NewInscripcion';
+import VerInscripciones from './Pages/VerInscripciones';
+import VerInscripcion from './Pages/VerInscripcion';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -99,6 +102,9 @@ const App = () => {
                 <Route path="/Index/usuarios/editar/:_id" element={<EditarUsuario />} />
                 <Route path="/Index/Proyectos/editar/:_id" element={<EditarProyecto />} />
                 <Route path="/Index/Lider/Proyectos/Editar/:_id" element={<EditarProyectoL />} />
+                <Route path="/Index/Estudiante/Proyectos/Incripcion/:_id" element={<NewInscripcion />} />
+                <Route path="/Index/Lider/Proyectos/Solicitudes/:_id" element={<VerInscripciones />} />
+                <Route path="/Index/Lider/Proyectos/Solicitudes/edit/:idestudiante/:_id" element={<VerInscripcion />} />
               </Route>
               <Route path='/' element={<AuthLayout />}>
                 <Route path='' element={<Login />} />

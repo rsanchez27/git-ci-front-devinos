@@ -73,19 +73,49 @@ const Mutation = {
         });
         return avanceEditado;
     },
-    createInscripcion: async (_, { idproyecto, idestudiante, estado, fechaingreso, fechaegreso }) => {
-        const newInscripcion = new Inscripcion({ idproyecto, idestudiante, estado, fechaingreso, fechaegreso })
-        return await newInscripcion.save()
+    createInscripcion: async (_, { idproyecto, idestudiante }) => {
+        const ExisteInscripcion = await Inscripcion.findOne({ idproyecto, idestudiante })
+        if (ExisteInscripcion){
+            return ExisteInscripcion
+        } else {
+
+            const fechaegreso = ""
+            const fechaingreso = ""
+            const estado = "PENDIENTE"
+            const newInscripcion = new Inscripcion({ idproyecto, idestudiante, estado, fechaingreso, fechaegreso })
+    
+            return await newInscripcion.save()
+
+        }
+
     },
     actualizarInscripcion: async (_, { _id, idproyecto, idestudiante, estado, fechaingreso, fechaegreso }) => {
-        const InscripcionEditado = await Inscripcion.findByIdAndUpdate(_id, {
-            idproyecto,
-            idestudiante,
-            estado,
-            fechaingreso,
-            fechaegreso
-        });
-        return InscripcionEditado;
+        const actualInscripcion = await Inscripcion.findOne({_id: _id})
+        if (actualInscripcion.estado == "RECHAZADA"){
+            return actualInscripcion;
+        }else if ((estado == "ACEPTADA") && (actualInscripcion.estado == "PENDIENTE")){
+            const tiempoTranscurrido = Date.now();
+            const hoy = new Date(tiempoTranscurrido);
+            fechaingreso = hoy.toLocaleDateString();
+            const InscripcionEditado = await Inscripcion.findByIdAndUpdate(_id, {
+                idproyecto,
+                idestudiante,
+                estado,
+                fechaingreso,
+                fechaegreso
+            });
+            return InscripcionEditado;
+        }else{
+            const InscripcionEditado = await Inscripcion.findByIdAndUpdate(_id, {
+                idproyecto,
+                idestudiante,
+                estado,
+                fechaingreso,
+                fechaegreso
+            });
+            return InscripcionEditado;
+        }
+
     },
     registrarUsuario: async (_, { correo, contrasena, identificacion, nombre, rol }) => {
         const salt = await bcrypt.genSalt(5)

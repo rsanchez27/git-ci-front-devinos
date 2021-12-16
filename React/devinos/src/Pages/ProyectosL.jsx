@@ -39,7 +39,7 @@ function ProyectosL() {
                                 <th>Estado</th>
                                 <th>Editar</th>
                                 <th>Ver avances</th>
-                                <th>Solicitudes</th>
+                                <th>Incripciones</th>
 
                             </tr>
                         </thead>
@@ -60,7 +60,7 @@ function ProyectosL() {
                                                     </Link>
                                                 </td>
                                                 <td>
-                                                    <Link to={`/Index/Lider/Proyectos/Solicitudes/${u._id}`}> Solicitudes
+                                                    <Link to={`/Index/Lider/Proyectos/Solicitudes/${u._id}`}> Ver
                                                     </Link>
                                                 </td>
                                             </tr>
