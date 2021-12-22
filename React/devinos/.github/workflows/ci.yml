@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    -uses: actions/checkout@v1
+    -name: Run script de una linea
+     run: echo Hola Mundo!
+    -name: Run script multilinea
+     run: |
+      echo Adiciona otras acciones para build
+      echo Tu proyecto
